@@ -240,8 +240,8 @@ func commandReadIssue(git *gitlab.Client, room *mautrix.Room, sender string, arg
 
 	var buf bytes.Buffer
 	fmt.Fprintf(&buf, "Issue #%[2]d by %[3]s: <a href='%[1]s'>%[4]s</a>.", issue.WebURL, issue.IID, issue.Author.Name, issue.Title)
-	if len(issue.Assignee.Name) > 0 {
-		fmt.Fprintf(&buf, " Assigned to %s.", issue.Assignee.Name)
+	if len(issue.Assignees) > 0 && len(issue.Assignees[0].Name) > 0 {
+		fmt.Fprintf(&buf, " Assigned to %s.", issue.Assignees[0].Name)
 	}
 	fmt.Fprintf(&buf, "<br/>\n<blockquote>%s</blockquote><br/>\n", strings.Replace(issue.Description, "\n", "<br/>\n", -1))
 	room.SendHTML(buf.String())
