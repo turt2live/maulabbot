@@ -54,7 +54,7 @@ func startMatrix() func() {
 			case evt := <-mxbot.Timeline:
 				switch evt.Type {
 				case mautrix.EvtRoomMessage:
-					evt.MarkRead()
+					//evt.MarkRead()
 					msg := evt.Content["body"].(string)
 					if !strings.HasPrefix(msg, "!gitlab") {
 						continue Loop
